@@ -1,4 +1,3 @@
-import spacy
 
 
 def get_noun_dependency(doc):
@@ -13,3 +12,5 @@ def get_dependency(doc):
     for token in doc:
         dependency.append((token.text, token.dep_, token.head.text, token.head.pos_, [child for child in token.children]))
     return dependency
+
+
