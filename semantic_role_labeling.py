@@ -30,10 +30,12 @@ class SemanticRoleLabeling:
                 role = tags[index][2:]
                 if role != 'V':
                     phrase = ""
+                    start = index
                     while index < len(tags) and tags[index] != 'O':
                         phrase += words[index] + " "
                         index += 1
-                    semantic_role.append((phrase.strip(), role))
+                    end = index-1
+                    semantic_role.append((phrase.strip(), start, end, role))
             index += 1
         return semantic_role
 
