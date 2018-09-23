@@ -1,6 +1,4 @@
-import spacy
-
-'''
+"""
 Support types: 
 PERSON: People, including fictional.
 NORP: Nationalities or religious or political groups.
@@ -20,14 +18,13 @@ MONEY: Monetary values, including unit.
 QUANTITY: Measurements, as of weight or distance.
 ORDINAL: "first", "second", etc.
 CARDINAL: Numerals that do not fall under another type.
-'''
+"""
 
 
-def get_name_entity(doc, entity_types):
-    entities = []
+def get_name_entity(doc) -> {}:
+    entities = {}
     for ent in doc.ents:
-        if not entity_types:
-            entities.append((ent.text, ent.start_char, ent.end_char, ent.label_))
-        elif ent.label_ in entity_types:
-            entities.append((ent.text, ent.start_char, ent.end_char, ent.label_))
+        if ent.label_ not in entities:
+            entities[ent.label_] = []
+        entities[ent.label_].append((ent.text, ent.start_char, ent.end_char))
     return entities

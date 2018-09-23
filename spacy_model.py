@@ -1,7 +1,7 @@
 import spacy
 
 
-def get_spacy_doc(model_name):
-    print('loading model...')
+def get_model(model_name):
+    print('loading spacy model...')
     nlp = spacy.load(model_name)
     return nlp
