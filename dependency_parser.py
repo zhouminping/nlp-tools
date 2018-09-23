@@ -18,14 +18,16 @@ class DependencyParser:
         if 'children' not in node:
             return
         for child in node['children']:
-            dep.append((child['word'], child['spans'][0]['start'], child['spans'][0]['end'],
-                        node['word'], node['spans'][0]['start'], node['spans'][0]['end'], child['nodeType']))
+            dep.append((child['word'], child['spans'][0]['start'], child['spans'][0]['end']-2,
+                        node['word'], node['spans'][0]['start'], node['spans'][0]['end']-2, child['nodeType']))
             self.__get_one_one_dependency(child, dep)
 
     def phrase_dependency(self, inputs: str) -> []:
         dependency_tree = self.parse(inputs)
         text = dependency_tree["text"]
-        parse_tree = [("root", dependency_tree['root']['word'])]
+        parse_tree = [("root", (dependency_tree['root']['word'],
+                                dependency_tree['root']['spans'][0]['start'],
+                                dependency_tree['root']['spans'][0]['end']-2))]
         children = dependency_tree['root']['children']
         for child in children:
             node_type = child['nodeType']
@@ -49,7 +51,7 @@ class DependencyParser:
             self.__get_phrase_span(child, spans)
 
     @staticmethod
-    def __get_phrase__(text: str, spans: {}) -> str:
+    def __get_phrase__(text: str, spans: {}) -> ():
         min_start = min(spans['start'])
         max_end = max(spans['end'])
-        return text[min_start: max_end]
+        return text[min_start: max_end-1], min_start, max_end-2
