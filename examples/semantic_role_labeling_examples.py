@@ -3,7 +3,7 @@ import semantic_role_labeling
 import time
 
 
-inputs = "When the new employee is entered into SAP, their NUID is created"
+inputs = "When the new employee is entered into WAP, their CID is created"
 
 start = time.time()
 semantic_predictor = allennlp_model.MODELS['semantic-role-labeling'].predictor()

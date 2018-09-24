@@ -3,7 +3,7 @@ import dependency_parser
 import time
 
 
-inputs = "When the new employee is entered into SAP, their NUID is created"
+inputs = "When the new employee is entered into WAP, their CID is created"
 
 start = time.time()
 dependency_predictor = allennlp_model.MODELS['dependency-parsing'].predictor()
